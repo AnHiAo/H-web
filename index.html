@@ -81,6 +81,7 @@
     masonry.on(masonry.constants.EVENT_IMAGE_COMPLETE, function (ctx) {
         console.log('all images have loaded');
         document.querySelector("#test-container").style.opacity="1";
+        masonry.recalculate();
         window.SmoothScroll();
     });
     }
