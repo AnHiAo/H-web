@@ -12,12 +12,22 @@
             box-sizing: border-box;
         }
         body{
+            font-family: sans-serif;
             padding: 0 1vw;
         }
         img{
             width: 100%;
         }
+        #test-loading{
+            position: absolute;
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
         #test-container{
+            position: absolute;
             opacity: 0;
         }
         #test-container .card .card-profile{
@@ -38,7 +48,9 @@
 </head>
 <body>
     <div id="test-container" style="width: 100%;">
-        
+    </div>
+    <div id="test-loading">
+        Loading... 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha512-HaoDYc3PGduguBWOSToNc0AWGHBi2Y432Ssp3wNIdlOzrunCtB2qq6FrhtPbo+PlbvRbyi86dr5VQx61eg/daQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
@@ -68,7 +80,7 @@
     let masonry = Macy({
     container: '#test-container',
     trueOrder: false,
-    waitForImages: false,
+    waitForImages: true,
     margin: 24,
     columns: 6,
     breakAt: {
@@ -80,6 +92,7 @@
     });
     masonry.on(masonry.constants.EVENT_IMAGE_COMPLETE, function (ctx) {
         console.log('all images have loaded');
+        document.querySelector("#test-loading").style.display="none";
         document.querySelector("#test-container").style.opacity="1";
         masonry.recalculate();
         window.SmoothScroll();
