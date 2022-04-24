@@ -1,103 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>H Web</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body{
+
+        body {
             font-family: sans-serif;
             padding: 0 1vw;
         }
-        img{
+
+        img {
             width: 100%;
         }
-        #test-loading{
-            position: absolute;
-            display: grid;
-            place-items: center;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
+
+        #test-container {
+            position: absolute !important;
+            min-height: 100vh;
         }
-        #test-container{
-            position: absolute;
-            opacity: 0;
+        #test-container .card{
+            padding: 1vw;
         }
-        #test-container .card .card-profile{
+        #test-container .card .card-profile {
             font-size: 14px;
-           
+
         }
-        #test-container >div{
+
+        #test-container>div {
             font-size: 0;
             padding: 1vw;
 
         }
-        #test-container .card .card-image{
+
+        #test-container .card .card-image {
+            min-height: 200px;
+            min-width: 200px;
             border: 3px solid #0000;
             border-radius: 13px;
             overflow: hidden;
         }
     </style>
 </head>
+
 <body>
+    <script src="https://unpkg.com/vanilla-lazyload@17.7.0/dist/lazyload.min.js"></script>
     <div id="test-container" style="width: 100%;">
     </div>
-    <div id="test-loading">
-        Loading... 
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js" integrity="sha512-HaoDYc3PGduguBWOSToNc0AWGHBi2Y432Ssp3wNIdlOzrunCtB2qq6FrhtPbo+PlbvRbyi86dr5VQx61eg/daQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/macy@2"></script>
+    <script src="https://unpkg.com/macy@2.0.0/dist/macy.js"></script>
     <script>
-    let cards_html = '';
-    document.addEventListener("DOMContentLoaded",async function(){
-        const result = await fetch("https://mockapi.eolink.com/DSyXl539b4bf5cdb7381fe38284a05d44d0631cf253c095/hentai",{
-            method:"GET"
-        });
-        const result_json = await result.json();
-        result_json['data'].forEach(v=>{
-            cards_html +=`
+        let cards_html = '';
+        var masonry ;
+        var lazyLoadInstance;
+        document.addEventListener("DOMContentLoaded", async function () {
+            const result = await fetch("https://mockapi.eolink.com/DSyXl539b4bf5cdb7381fe38284a05d44d0631cf253c095/hentai", {
+                method: "GET"
+            });
+            const result_json = await result.json();
+            result_json['data'].forEach(v => {
+                cards_html += `
             <div>
                 <div class="card">
                     <div class="card-image">
-                        <img src="${v}" / >
+                        <img alt="A lazy image" data-lazy-function="foo" src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v}" / >
                     </div>
                 <div class="card-profile">
                 </div>
             </div>
         </div>`
-        });
-        document.querySelector("#test-container").insertAdjacentHTML("beforeend",cards_html);
-        document.removeEventListener('DOMContentLoaded', arguments.callee, false);
-    })
-    window.onload=function(){
-    let masonry = Macy({
-    container: '#test-container',
-    trueOrder: false,
-    waitForImages: true,
-    margin: 24,
-    columns: 6,
-    breakAt: {
-        1200: 5,
-        940: 3,
-        520: 2,
-        400: 1
-    }
-    });
-    masonry.on(masonry.constants.EVENT_IMAGE_COMPLETE, function (ctx) {
-        console.log('all images have loaded');
-        document.querySelector("#test-loading").style.display="none";
-        document.querySelector("#test-container").style.opacity="1";
-        masonry.recalculate();
-        window.SmoothScroll();
-    });
-    }
+            });
+            document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html);
+            masonry = Macy({
+                container: '#test-container',
+                trueOrder: false,
+                waitForImages: false,
+                margin: 24,
+                columns: 6,
+                breakAt: {
+                    1200: 5,
+                    940: 3,
+                    520: 2,
+                    400: 1
+                }
+            });
+            masonry.runOnImageLoad(function () {
+            }, false);
+           
+            lazyLoadInstance = new LazyLoad({ 
+                callback_enter:(element)=>{
+                    element.addEventListener("load",()=>{
+                        console.log("element loaded");
+                        console.log(masonry.recalculate());
+                        console.log(masonry.reInit());
+                    })
+                }
+             });
+             
+            document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+        })
     </script>
 </body>
 </html>
