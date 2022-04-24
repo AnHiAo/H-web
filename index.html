@@ -101,7 +101,7 @@
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
                 callback_finish:()=>{console.log("callback finish")},
-                callback_load:(element)=>{
+                callback_loaded:(element)=>{
                         console.log("callback load");
                         waterfall(document.querySelector("#test-container"));
 
