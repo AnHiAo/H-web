@@ -95,8 +95,8 @@
                 callback_enter:(element)=>{
                     element.addEventListener("load",()=>{
                         console.log("element loaded");
-                        
-                        console.log(masonry.reInit());
+                        console.log(masonry.recalculate());
+                       
                     })
                 }
              });
