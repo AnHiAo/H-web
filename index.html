@@ -97,8 +97,9 @@
                 callback_enter:(element)=>{
                        element.onload=function(){
                          console.log("element loaded");
+                         console.log(masonry.recalculate(true));
                          console.log(masonry.reInit());
-//                         console.log(masonry.recalculate());
+ 
                        }
                       
                 }
