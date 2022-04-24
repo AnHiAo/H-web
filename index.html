@@ -51,6 +51,7 @@
 </head>
 
 <body>
+    <script src="https://my-file.cn/api/v3/file/source/25367/main.js?sign=pDk3fQWTC3PeFa7qAFhYioi7rx1Py0Mohwj7ClOjjas%3D%3A0"> </script>
     <script src="https://unpkg.com/vanilla-lazyload@17.7.0/dist/lazyload.min.js"></script>
     <div id="test-container" style="width: 100%;">
     </div>
@@ -59,17 +60,14 @@
         let cards_html = '';
         var masonry ;
         var lazyLoadInstance;
-        document.addEventListener("DOMContentLoaded", async function () {
-            const result = await fetch("https://mockapi.eolink.com/DSyXl539b4bf5cdb7381fe38284a05d44d0631cf253c095/hentai", {
-                method: "GET"
-            });
-            const result_json = await result.json();
-            result_json['data'].forEach(v => {
+        document.addEventListener("DOMContentLoaded",  function () {
+            const result_json = cardList;
+            result_json.forEach(v => {
                 cards_html += `
             <div>
                 <div class="card">
                     <div class="card-image">
-                        <img alt="A lazy image" data-lazy-function="foo" src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v}" / >
+                        <img  src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v}" / >
                     </div>
                 <div class="card-profile">
                 </div>
