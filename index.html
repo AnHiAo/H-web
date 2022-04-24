@@ -93,6 +93,7 @@
            
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
+                callback_finish:()=>{console.log("callback finish")},
                 callback_enter:(element)=>{
                        element.onload=function(){
                          console.log("element loaded");
