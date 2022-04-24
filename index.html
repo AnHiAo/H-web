@@ -93,11 +93,13 @@
            
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
-                callback_loaded:(element)=>{
-                 
-                        console.log("element loaded");
+                callback_enter:(element)=>{
+                       element.onload=function(){
+                         console.log("element loaded");
                          console.log(masonry.reInit());
                         console.log(masonry.recalculate());
+                       }
+                      
                 }
              });
              
