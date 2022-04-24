@@ -31,7 +31,6 @@
         }
         #test-container .card .card-profile {
             font-size: 14px;
-
         }
 
         #test-container>div {
@@ -47,15 +46,23 @@
             border-radius: 13px;
             overflow: hidden;
         }
+
+        @media screen and (min-width: 1024px) {
+        #test-container .card .card-image {
+            max-width: 33.3333%;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js"></script>
+    
     <script src="https://my-file.cn/api/v3/file/source/25367/main.js?sign=pDk3fQWTC3PeFa7qAFhYioi7rx1Py0Mohwj7ClOjjas%3D%3A0"> </script>
     <script src="https://unpkg.com/vanilla-lazyload@17.7.0/dist/lazyload.min.js"></script>
     <div id="test-container" style="width: 100%;">
     </div>
-    <script src="https://unpkg.com/macy@2.0.0/dist/macy.js"></script>
+
     <script>
         let cards_html = '';
         var masonry ;
@@ -75,32 +82,34 @@
         </div>`
             });
             document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html);
-            masonry = Macy({
-                container: '#test-container',
-                trueOrder: false,
-                waitForImages: false,
-                margin: 24,
-                columns: 6,
-                breakAt: {
-                    1200: 5,
-                    940: 3,
-                    520: 2,
-                    400: 1
-                }
-            });
-            masonry.runOnImageLoad(function () {
-            }, false);
+            // masonry = Macy({
+            //     container: '#test-container',
+            //     trueOrder: false,
+            //     waitForImages: false,
+            //     margin: 24,
+            //     columns: 6,
+            //     breakAt: {
+            //         1200: 5,
+            //         940: 3,
+            //         520: 2,
+            //         400: 1
+            //     }
+            // });
+            // masonry.runOnImageLoad(function () {
+            // }, false);
            
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
                 callback_finish:()=>{console.log("callback finish")},
                 callback_enter:(element)=>{
                        element.onload=function(){
-                         console.log("element loaded");
-                         console.log(masonry.recalculate(true));
+                        waterfall(document.querySelector("#test-container"));
+
+                        //  console.log("element loaded");
+                        //  console.log(masonry.recalculate(true));
                            
-                         console.log(masonry.resizer());
-                         console.log(masonry.reInit());
+                        //  console.log(masonry.resizer());
+                        //  console.log(masonry.reInit());
  
                        }
                       
@@ -108,7 +117,11 @@
              });
              
             document.removeEventListener('DOMContentLoaded', arguments.callee, false);
-        })
+        });
+        window.addEventListener('resize', function () {
+                waterfall(document.querySelector("#test-container"));
+
+            });
     </script>
 </body>
 </html>
