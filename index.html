@@ -92,13 +92,12 @@
             }, false);
            
             lazyLoadInstance = new LazyLoad({ 
-                callback_enter:(element)=>{
-                    element.addEventListener("load",()=>{
+                threshold:0,
+                callback_loaded:(element)=>{
+                 
                         console.log("element loaded");
                          console.log(masonry.reInit());
                         console.log(masonry.recalculate());
-                       
-                    })
                 }
              });
              
