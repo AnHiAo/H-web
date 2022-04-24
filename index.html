@@ -101,8 +101,8 @@
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
                 callback_finish:()=>{console.log("callback finish")},
-                callback_enter:(element)=>{
-                       element.onload=function(){
+                callback_load:(element)=>{
+                        console.log("callback load");
                         waterfall(document.querySelector("#test-container"));
 
                         //  console.log("element loaded");
@@ -111,8 +111,6 @@
                         //  console.log(masonry.resizer());
                         //  console.log(masonry.reInit());
  
-                       }
-                      
                 }
              });
              
