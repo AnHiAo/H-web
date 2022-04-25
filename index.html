@@ -184,7 +184,7 @@
     </div>
 
     <script>
-      
+      var intersectionObserver;
         var masonry ;
         var lazyLoadInstance;
 	let observeDom = null;
@@ -253,7 +253,7 @@
 		observeDom = document.querySelector("#test-container >div:last-child");
             // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
           
-	var intersectionObserver = new IntersectionObserver(function(entries) {
+   intersectionObserver = new IntersectionObserver(function(entries) {
   // If intersectionRatio is 0, the target is out of view
   // and we do not need to do anything.
   if (entries[0].intersectionRatio <= 0) return;
