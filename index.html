@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H Web</title>
     <style>
-	--testbg:#fff;
+
         * {
             margin: 0;
             padding: 0;
@@ -31,6 +31,9 @@
             min-height: 100vh;
         }
         #test-container .card{
+	    --cardImageFilter:blur(0px);
+	    --cardReadMoreTransform:translate();
+	    --cardProfileTransform:translate();
             border-radius: 7px;
             box-shadow: 0 0 20px rgb(0 0 0 / 30%);
             overflow: hidden;
@@ -69,13 +72,13 @@
             border-radius: 50%;
 
         }
-	    
-	#test-container .card .card-readmore:hover + .card-image {
-	 filter: blur(3px);
+	 #test-container .card .card-readmore:hover{
+	
+		 filter: blur(3px);
 }
- 	#test-container .card .card-readmore:hover ~ .card-profile {
+ 	#test-container .card .card-readmore:hover {
 	 transform: translateY(0);
-	--testbg:#f00;
+	--cardImageFilter:#f00;
 }
  
         #test-container .card .card-readmore div{
