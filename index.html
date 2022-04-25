@@ -31,6 +31,7 @@
         }
         #test-container .card{
             border-radius: 7px;
+            box-shadow: 0 0 20px rgb(0 0 0 / 30%);
             overflow: hidden;
             position: relative;
         }
@@ -51,6 +52,27 @@
 
         }
 
+        #test-container .card .card-readmore {
+            position: absolute;
+            z-index: 2;
+            bottom: 3vw;
+            right: 3vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+
+        }
+        #test-container .card .card-readmore div{
+            width: 1vw;
+            height: 1vw;
+            border-radius: 50%;
+            margin: 0 .5vw;
+            background-color: black;
+        }
         #test-container .card .card-image {
             min-height: 200px;
             min-width: 200px;
@@ -62,6 +84,7 @@
             padding:1vh 1vw;
             background-color: white;
             transition: transform .45s ease-in-out;
+            z-index: 3;
             position: absolute;
             left:0;
             bottom: 0;
@@ -159,8 +182,10 @@
                     </div>
               
                 </div>
-
-                  
+                <div class="card-readmore">
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
         </div>`
