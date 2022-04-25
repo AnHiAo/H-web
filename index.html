@@ -187,10 +187,9 @@
         let cards_html = '';
         var masonry ;
         var lazyLoadInstance;
-        document.addEventListener("DOMContentLoaded",  function () {
-            const result_json = cardList;
-            // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
-            result_json.forEach(v => {
+	let observeDom = null;
+	function updateCards(result_json){
+		  result_json.forEach(v => {
                 cards_html += `
             <div>
                 <div class="card">
@@ -238,8 +237,23 @@
 			    
 		window.requestAnimationFrame(function(){
 			 document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html)
-		})
-           ;
+		});
+	}
+        document.addEventListener("DOMContentLoaded",  function () {   
+		updateCards(cardList.splice(0,3));
+		observeDom = document.querySelector("#test-container >div:last-child");
+            // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
+          
+	var intersectionObserver = new IntersectionObserver(function(entries) {
+  // If intersectionRatio is 0, the target is out of view
+  // and we do not need to do anything.
+  if (entries[0].intersectionRatio <= 0) return;
+intersectionObserver.unobserve(observeDom);
+ updateCards(cardList.splice(0,3));
+ observeDom = document.querySelector("#test-container >div:last-child");
+});
+// start observing
+intersectionObserver.observe(observeDom);
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
                 callback_finish:()=>{console.log("callback finish")},
