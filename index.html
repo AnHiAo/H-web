@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>H Web</title>
     <style>
+	--testbg:#fff;
         * {
             margin: 0;
             padding: 0;
@@ -45,6 +46,7 @@
  
         #test-container .card .card-profile {
             font-size: 14px;
+	    background:var(--testbg);
         }
 
         #test-container>div {
@@ -73,6 +75,7 @@
 }
  	#test-container .card .card-readmore:hover ~ .card-profile {
 	 transform: translateY(0);
+	--testbg:#f00;
 }
  
         #test-container .card .card-readmore div{
@@ -102,6 +105,14 @@
             display: flex;
              flex-wrap: wrap;
         }
+	    }
+	#test-container .card .card-profile:hover ~
+	    #test-container .card .card-profile:hover  ~ .card-image {
+	    filter:blur(3px);
+	    }
+ 	#test-container .card .card-profile:hover{
+	 	transform: translateY(0);
+	}
         #test-container .card .card-profile .card-profile-tag {
             width: 100%;
             margin-bottom: 1vh;
