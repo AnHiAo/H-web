@@ -54,19 +54,33 @@
         #test-container .card .card-image {
             min-height: 200px;
             min-width: 200px;
-            transition: filter .35s linear;
+            transition: filter .45s ease-in-out;
             /* border-radius: 13px;
             overflow: hidden; */
         }
         #test-container .card .card-profile{
             padding:1vh 1vw;
             background-color: white;
-            transition: transform .4s linear;
+            transition: transform .45s ease-in-out;
             position: absolute;
             left:0;
             bottom: 0;
 	        transform: translateY(100%);
             width: 100%;
+            display: flex;
+             flex-wrap: wrap;
+        }
+        #test-container .card .card-profile .card-profile-tag {
+            width: 100%;
+            margin-bottom: 1vh;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            color: rgb(61, 118, 153);
+        }
+        #test-container .card .card-profile .card-profile-tag  span{
+            display: inline-block;
+            margin-left: 1vw;
         }
         #test-container .card .card-profile .card-profile-author {
             display: flex;
@@ -81,11 +95,23 @@
             height: 50px;
             max-width: 100px;
             max-height: 100px;
+            position: relative;
+        }
+        /* #test-container . */
+        #test-container .card .card-profile .card-profile-author .card-profile-author-avatar img:nth-child(2){
             border-radius: 50%;
             border: 2px solid black;
             overflow: hidden;
         }
-     
+        #test-container .card .card-profile .card-profile-author .card-profile-author-avatar img:first-child{
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 2;
+        }
+        
         @media screen and (min-width: 768px) {
         #test-container .card {
             max-width: 20vw;
@@ -108,23 +134,33 @@
         var lazyLoadInstance;
         document.addEventListener("DOMContentLoaded",  function () {
             const result_json = cardList;
+            // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
             result_json.forEach(v => {
                 cards_html += `
             <div>
                 <div class="card">
                     <div class="card-image">
-                        <img  src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v}?date=${new Date().getTime()}" / >
+                        <img  src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v.image.src}?date=${new Date().getTime()}" / >
                     </div>
                 <div class="card-profile">
+                    <div class="card-profile-tag">
+                        ${(v.image.tags.map(v=>{
+                            return `<span>#${v}</span>`
+                        })).join("\n")}
+                    </div>
                     <div class="card-profile-author">
                         <div class="card-profile-author-avatar">
-                            <img src="https://my-img.cc/i/2022/04/25/6265de8545141.gif" />
+                            <img src="https://my-img.cc/i/2022/04/25/6265ea81b426e.ico" />
+                            <img src="${v.author.avatar}" />
                         </div>
                         <div class="card-profile-author-name">
-                            <a href="https://www.baidu.com">ﾉﾉﾔﾏ </a>
-                                </div>
-                        </div>    
+                            <a href="${v.author.home}">${v.author.name}</a>
+                         </div>
                     </div>
+              
+                </div>
+
+                  
                 </div>
             </div>
         </div>`
