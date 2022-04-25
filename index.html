@@ -259,7 +259,9 @@
   if (entries[0].intersectionRatio <= 0) return;
 intersectionObserver.unobserve(observeDom);
  updateCards(cardList.splice(0,3),"async",()=>{
- 		 observeDom = document.querySelector("#test-container >div:last-child");
+	 waterfall("#test-container");
+	 lazyLoadInstance.update();
+ 	 observeDom = document.querySelector("#test-container >div:last-child");
 	 intersectionObserver.observe(observeDom);
  });
 });
