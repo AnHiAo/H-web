@@ -184,11 +184,12 @@
     </div>
 
     <script>
-        let cards_html = '';
+      
         var masonry ;
         var lazyLoadInstance;
 	let observeDom = null;
 	function updateCards(result_json,type="async",calllback=()=>{}){
+		  let cards_html = '';
 		  result_json.forEach(v => {
                 cards_html += `
             <div>
@@ -238,8 +239,13 @@
 		if(type === "await"){
 		  return ( document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html));
 		}
-		document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html);
-		calllback();
+		window.window.requestAnimationFrame(function(){
+			
+				document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html);
+		calllback();	
+			
+		})
+	
 		
 	}
         document.addEventListener("DOMContentLoaded",  function () {   
