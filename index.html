@@ -17,7 +17,9 @@
             font-family: sans-serif;
             padding: 0 1vw;
         }
-
+        a{
+            text-decoration: none;font-size: 16px;color: beige;
+        }
         img {
             width: 100%;
         }
@@ -28,8 +30,17 @@
             min-height: 100vh;
         }
         #test-container .card{
-            padding: 1vw;
+            border-radius: 7px;
+            overflow: hidden;
+            position: relative;
         }
+        #test-container .card:hover .card-image {
+	 filter: blur(3px);
+}
+ #test-container .card:hover .card-profile {
+	 transform: translateY(0);
+}
+ 
         #test-container .card .card-profile {
             font-size: 14px;
         }
@@ -43,11 +54,37 @@
         #test-container .card .card-image {
             min-height: 200px;
             min-width: 200px;
-            border: 3px solid #0000;
-            border-radius: 13px;
+            transition: filter .45s ease-in-out;
+            /* border-radius: 13px;
+            overflow: hidden; */
+        }
+        #test-container .card .card-profile{
+            padding:1vh 1vw;
+            background-color: white;
+            transition: transform .45s ease-in-out;
+            position: absolute;
+            left:0;
+            bottom: 0;
+	        transform: translateY(100%);
+            width: 100%;
+        }
+        #test-container .card .card-profile .card-profile-author {
+            display: flex;
+            align-items: center;
+        }
+        #test-container .card .card-profile .card-profile-author .card-profile-author-name a{
+            color: black;
+            margin-left: 10px;
+        }
+        #test-container .card .card-profile .card-profile-author .card-profile-author-avatar{
+            width: 50px;
+            height: 50px;
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%;
+            border: 2px solid black;
             overflow: hidden;
         }
-
      
         @media screen and (min-width: 768px) {
         #test-container .card {
@@ -79,27 +116,20 @@
                         <img  src="https://jscdn-x.panbaidu.cn/source/Sakurairo_Vision/@2.4/load_svg/outload.svg" class="lazy"  data-src="${v}?date=${new Date().getTime()}" / >
                     </div>
                 <div class="card-profile">
+                    <div class="card-profile-author">
+                        <div class="card-profile-author-avatar">
+                            <img src="https://my-img.cc/i/2022/04/25/6265de8545141.gif" />
+                        </div>
+                        <div class="card-profile-author-name">
+                            <a href="https://www.baidu.com">ﾉﾉﾔﾏ </a>
+                                </div>
+                        </div>    
+                    </div>
                 </div>
             </div>
         </div>`
             });
             document.querySelector("#test-container").insertAdjacentHTML("beforeend", cards_html);
-            // masonry = Macy({
-            //     container: '#test-container',
-            //     trueOrder: false,
-            //     waitForImages: false,
-            //     margin: 24,
-            //     columns: 6,
-            //     breakAt: {
-            //         1200: 5,
-            //         940: 3,
-            //         520: 2,
-            //         400: 1
-            //     }
-            // });
-            // masonry.runOnImageLoad(function () {
-            // }, false);
-           
             lazyLoadInstance = new LazyLoad({ 
                 threshold:0,
                 callback_finish:()=>{console.log("callback finish")},
