@@ -72,13 +72,13 @@
             border-radius: 50%;
 
         }
-	 #test-container .card .card-readmore:hover{
+	 #test-container .card .card-readmore:hover ~ .card-image{
 	
 		 filter: blur(3px);
 }
- 	#test-container .card .card-readmore:hover {
+ 	#test-container .card .card-readmore:hover ~ .card-profile{
 	 transform: translateY(0);
-	--cardImageFilter:#f00;
+	
 }
  
         #test-container .card .card-readmore div{
@@ -109,8 +109,7 @@
              flex-wrap: wrap;
         }
 	    }
-	#test-container .card .card-profile:hover ~
-	    #test-container .card .card-profile:hover  ~ .card-image {
+       #test-container .card .card-profile:hover  ~ .card-image {
 	    filter:blur(3px);
 	    }
  	#test-container .card .card-profile:hover{
