@@ -250,18 +250,19 @@
 	}
         document.addEventListener("DOMContentLoaded",  function () {   
 		updateCards(cardList.splice(0,3),"await");
-		observeDom = document.querySelector("#test-container >div:nth-last-child(2)");
+		observeDom = document.querySelector("#test-container >div:last-child");
             // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
           
 	var intersectionObserver = new IntersectionObserver(function(entries) {
   // If intersectionRatio is 0, the target is out of view
   // and we do not need to do anything.
   if (entries[0].intersectionRatio <= 0) return;
+		console.log(IntersectionObserver.takeRecords());
 intersectionObserver.unobserve(observeDom);
  updateCards(cardList.splice(0,3),"async",()=>{
 	 waterfall("#test-container");
 	 lazyLoadInstance.update();
- 	 observeDom = document.querySelector("#test-container >div:nth-last-child(2)");
+ 	 observeDom = document.querySelector("#test-container >div:last-child");
 	 intersectionObserver.observe(observeDom);
  });
 });
@@ -274,11 +275,7 @@ intersectionObserver.observe(observeDom);
                         console.log("callback load");
                         waterfall(document.querySelector("#test-container"));
 
-                        //  console.log("element loaded");
-                        //  console.log(masonry.recalculate(true));
-                           
-                        //  console.log(masonry.resizer());
-                        //  console.log(masonry.reInit());
+    
  
                 }
              });
