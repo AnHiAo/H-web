@@ -214,7 +214,7 @@ function copySource(e) {
    elem_child.value = e.getAttribute("data-source");
     elem.appendChild(elem_child);
    document.body.appendChild(elem);
-   elem.select();
+
    document.execCommand('copy');
    document.body.removeChild(elem);
 }
