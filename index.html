@@ -208,15 +208,12 @@
 	  
 
 function copySource(e) {
-   const elem = document.createDocumentFragment();
- 
-   const elem_child = document.createElement('textarea');
-   elem_child.value = e.getAttribute("data-source");
-    elem.appendChild(elem_child);
+   const elem = document.createElement('textarea');
+   elem.value = e.getAttribute("data-source");
    document.body.appendChild(elem);
-
    document.execCommand('copy');
    document.body.removeChild(elem);
+   alert("复制成功");
 }
 
 	function updateCards(result_json,type="async",calllback=()=>{}){
