@@ -191,24 +191,133 @@
 
 <body>
 	<input id="testinput" type="text" style="opacity:0;position:absolute;z-index:-999;" value="hello world" />
+    
+    <!-- <script src=""> -->
 
+            <script src="https://cdn.jsdelivr.net/gh/abdmob/x2js@master/xml2json.js"></script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- <script>
+    (async ()=>{
+
+    
+    let maindata= [];
+    let res = await axios({
+        method:"GET",
+        url:"https://picreverse.anhiao2358.workers.dev/post.xml"
+    })
+        // console.log(res.data);
+        const data = res.data;
+        const match_data = (res.data.match(/<post id=[\s\S]+?\/>/g));
+        // console.log(match_data.length);
+        console.log(match_data);
+        maindata = match_data.map(v=>{
+            let source = v.match(/source="([\s\S]+?)"/)[1];
+            const article_id = v.match(/id="([\s\S]+?)"/)[1];
+            const tags = v.match(/tags="([\s\S]+?)"/)[1];
+            const author = v.match(/author="([\s\S]+?)"/)[1];
+            const sample_url = v.match(/sample_url="([\s\S]+?)"/)[1];
+            const file_url = v.match(/file_url="([\s\S]+?)"/)[1]
+            // console.log(tags);
+            let obj = {};
+            if(source === ""){
+                source = "https://yande.re/posts/"+id
+            } else { 
+                if(source.includes("pximg")){
+                    const pixivId = source.match(/\d+(?=_)/);
+                    source = `https://pixiv.net/atworks/${pixivId}`
+                }
+            };
+            console.log("added");
+            console.log(tags);
+            
+                
+            
+            return {
+                image:{
+                    source:source,
+                    sample:sample_url,
+                    src:file_url,
+                    tags:tags.split(" ")
+                },
+                author:{
+                    home:"###",
+                    avatar:"https://rapid-breeze-280c.anhiao2358.workers.dev/user-profile/img/2022/04/29/20/32/56/22627068_11e84848f5171ec714bf4a9b8987085d_170.jpg",
+                    name:author,
+                } }
+        })
+        console.log(maindata);
+    })();
+    </script> -->
+    
     <script>
 	
  function waterfall(a){function b(a,b){var c=window.getComputedStyle(b);return parseFloat(c["margin"+a])||0}function c(a){return a+"px"}function d(a){return parseFloat(a.style.top)}function e(a){return parseFloat(a.style.left)}function f(a){return a.clientWidth}function g(a){return a.clientHeight}function h(a){return d(a)+g(a)+b("Bottom",a)}function i(a){return e(a)+f(a)+b("Right",a)}function j(a){a=a.sort(function(a,b){return h(a)===h(b)?e(b)-e(a):h(b)-h(a)})}function k(b){f(a)!=t&&(b.target.removeEventListener(b.type,arguments.callee),waterfall(a))}"string"==typeof a&&(a=document.querySelector(a));var l=[].map.call(a.children,function(a){return a.style.position="absolute",a});a.style.position="relative";var m=[];l.length&&(l[0].style.top="0px",l[0].style.left=c(b("Left",l[0])),m.push(l[0]));for(var n=1;n<l.length;n++){var o=l[n-1],p=l[n],q=i(o)+f(p)<=f(a);if(!q)break;p.style.top=o.style.top,p.style.left=c(i(o)+b("Left",p)),m.push(p)}for(;n<l.length;n++){j(m);var p=l[n],r=m.pop();p.style.top=c(h(r)+b("Top",p)),p.style.left=c(e(r)),m.push(p)}j(m);var s=m[0];a.style.height=c(h(s)+b("Bottom",s));var t=f(a);window.addEventListener?window.addEventListener("resize",k):document.body.onresize=k}
 	</script>
     
-    <script src="https://my-file.cn/api/v3/file/source/25367/main.js?sign=pDk3fQWTC3PeFa7qAFhYioi7rx1Py0Mohwj7ClOjjas%3D%3A0&"> </script>
-    <script src="https://unpkg.com/vanilla-lazyload@17.7.0/dist/lazyload.min.js"></script>
+ <script src="https://unpkg.com/vanilla-lazyload@17.7.0/dist/lazyload.min.js"></script>
     <div id="test-container" style="width: 100%;">
     </div>
 
     <script>
+        var cardList;
       var intersectionObserver;
         var masonry ;
         var lazyLoadInstance;
 	let observeDom = null;
 	let copyText = document.getElementById("testinput");
 	  
+var maindata;
+    async function getNewData(){
+
+    
+
+let res = await axios({
+    method:"GET",
+    url:"https://picreverse.anhiao2358.workers.dev/post.xml"
+})
+    // console.log(res.data);
+    const data = res.data;
+    const match_data = (res.data.match(/<post id=[\s\S]+?\/>/g));
+    // console.log(match_data.length);
+    console.log(match_data);
+    maindata = match_data.map(v=>{
+        let source = v.match(/source="([\s\S]+?)"/)[1];
+        const article_id = v.match(/id="([\s\S]+?)"/)[1];
+        const tags = v.match(/tags="([\s\S]+?)"/)[1];
+        const author = v.match(/author="([\s\S]+?)"/)[1];
+        const sample_url = v.match(/sample_url="([\s\S]+?)"/)[1];
+        const file_url = v.match(/file_url="([\s\S]+?)"/)[1]
+        // console.log(tags);
+        let obj = {};
+        if(source === ""){
+            source = "https://yande.re/posts/"+id
+        } else { 
+            if(source.includes("pximg")){
+                const pixivId = source.match(/\d+(?=_)/);
+                source = `https://www.pixiv.net/artworks/${pixivId}`
+            }
+        };
+        console.log("added");
+        console.log(tags);
+        
+            
+        
+        return {
+            image:{
+                source:source,
+                sample:sample_url.replace("files.yande.re","rapid-breeze-280c.anhiao2358.workers.dev"),
+                src:file_url.replace("files.yande.re","rapid-breeze-280c.anhiao2358.workers.dev"),
+                tags:tags.split(" ")
+            },
+            author:{
+                home:"###",
+                avatar:"https://rapid-breeze-280c.anhiao2358.workers.dev/user-profile/img/2022/04/29/20/32/56/22627068_11e84848f5171ec714bf4a9b8987085d_170.jpg",
+                name:author,
+            } }
+    })
+    console.log(maindata);
+};
 
 function copySource(e) {
    const elem = document.createElement('textarea');
@@ -249,7 +358,7 @@ function copySource(e) {
                     </div>
 		    <div class="card-profile-image">
 		    		<div class="card-profile-image-view">
-					<a href="${v.image.src}?date=${new Date().getTime()}" download>
+					<a href="${v.image.source}?date=${new Date().getTime()}" download>
 	    				<svg t="1650913118410" class="icon" viewBox="0 0 1433 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="18702" width="20" height="20"><path d="M716.8 25.6c225.8432 20.2752 401.3568 101.376 526.3872 243.2C1368.2688 410.624 1431.7568 491.7248 1433.6 512c-1.8432 20.2752-65.3312 101.376-190.4128 243.2-125.0304 141.824-300.544 222.9248-526.3872 243.2-225.8432-20.2752-401.3568-101.376-526.3872-243.2C65.3312 613.376 1.8432 532.2752 0 512c1.8432-20.2752 65.3312-101.376 190.4128-243.2C315.392 126.976 490.9568 45.8752 716.8 25.6z m0 88.4224c-158.6688 10.1376-290.7136 62.8736-396.1856 158.208C215.1424 367.616 143.2576 447.5392 104.96 512c38.2464 64.512 110.08 144.384 215.552 239.7696 105.472 95.3344 237.568 148.0704 396.2368 158.208 158.6688-10.1376 290.7136-62.8736 396.1856-158.208 105.472-95.3856 177.3568-175.3088 215.6032-239.7696-38.2464-64.512-110.08-144.384-215.552-239.7696-105.472-95.3344-237.568-148.0704-396.2368-158.208z m0 88.4736c88.6784 1.8432 162.6112 32 221.9008 90.4704 59.2896 58.5216 89.856 131.5328 91.6992 219.0336-1.8432 87.552-32.4096 160.512-91.6992 219.0336-59.2896 58.4704-133.2224 88.6272-221.9008 90.4704-88.6784-1.8432-162.6112-32-221.9008-90.4704C435.6096 672.512 405.0432 599.5008 403.2 512c1.8432-87.552 32.4096-160.512 91.6992-219.0336C554.1888 234.496 628.1216 204.3392 716.8 202.496z m0 88.4224c-63.488 1.8432-116.224 23.5008-158.208 64.9216-41.984 41.472-63.9488 93.5424-65.792 156.16 1.8432 62.6176 23.808 114.688 65.792 156.16 41.984 41.472 94.72 63.0784 158.208 64.9216 63.488-1.8432 116.224-23.5008 158.208-64.9216 41.984-41.472 63.9488-93.5424 65.792-156.16-1.8432-62.6176-23.808-114.688-65.792-156.16-41.984-41.472-94.72-63.0784-158.208-64.9216z" fill="#2c2c2c" p-id="18703"></path></svg>
 	    				</a>
 	    			</div>
@@ -265,7 +374,7 @@ function copySource(e) {
               
                 </div>
       <div class="card-image">
-                        <img  src="https://my-file.cn/api/v3/file/source/25408/preloader.svg?sign=iWEhPXO_aDsC3rKr50itA8O2nYRTtNUbgUaW5PBNqxk%3D%3A0" class="lazy"  data-src="${v.image.src}?date=${new Date().getTime()}" / >
+                        <img  src="https://my-file.cn/api/v3/file/source/25408/preloader.svg?sign=iWEhPXO_aDsC3rKr50itA8O2nYRTtNUbgUaW5PBNqxk%3D%3A0" class="lazy"  data-src="${v.image.sample}?date=${new Date().getTime()}" / >
                     </div>
             </div>
 	    
@@ -284,7 +393,9 @@ function copySource(e) {
 	
 		
 	}
-        document.addEventListener("DOMContentLoaded",  function () {   
+        document.addEventListener("DOMContentLoaded",  async function () {   
+        await getNewData();
+        cardList = maindata;
 		updateCards(cardList.splice(0,3),"await");
 		observeDom = document.querySelector("#test-container >div:last-child");
             // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
@@ -293,7 +404,7 @@ function copySource(e) {
   // If intersectionRatio is 0, the target is out of view
   // and we do not need to do anything.
   if (entries[0].intersectionRatio <= 0) return;
-		console.log(intersectionObserver.takeRecords());
+		// console.log(intersectionObserver.takeRecords());
 intersectionObserver.unobserve(observeDom);
  updateCards(cardList.splice(0,3),"async",()=>{
 	 waterfall("#test-container");
