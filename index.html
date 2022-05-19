@@ -274,7 +274,7 @@ var maindata;
 
 let res = await axios({
     method:"GET",
-    url:"https://cfworker.cf/?domain=yande.re&path=/post.xml"
+    url:`https://cfworker.cf?url=${`https://yande.re/post.xml`}`,
 })
     // console.log(res.data);
     const data = res.data;
@@ -306,8 +306,8 @@ let res = await axios({
         return {
             image:{
                 source:source,
-                sample:sample_url.replace("files.yande.re","cfworker.cf/?domain=files.yande.re"),
-                src:file_url.replace("files.yande.re","cfworker.cf?domain=files.yande.re"),
+                sample:`https://cfworker.cf?url=${sample_url}`,
+                src:`https://cfworker.cf?url=${file_url}`,
                 tags:tags.split(" ")
             },
             author:{
