@@ -191,7 +191,7 @@
 </head>
 
 <body>
-	<div style="position:absolute;inset:0;z-index:5;background:#fff;display:flex;align-items:center;">
+	<div id="loading-preloader" style="position:absolute;inset:0;z-index:5;background:#fff;display:flex;align-items:center;">
 		<video loop poster="https://my-file.cn/api/v3/file/source/25374/poster.png?sign=CsF2XyGAA9JDsBICZ0q_26fSGT5wgJ2Cu7nJuAAllro%3D%3A0" autoplay muted src="https://my-file.cn/api/v3/file/source/26125/Ghosty.mp4?sign=GWgEcCpgyvaPhmK-Zw4qWcnr-aYsF87LxNgNZQbDX0c%3D%3A0" style="width:100%;max-width:800px;height:auto;"></video>
 	</div>
     <input id="testinput" type="text" style="opacity:0;position:absolute;z-index:-999;" value="hello world" />
@@ -401,6 +401,9 @@ function copySource(e) {
         await getNewData();
         cardList = maindata;
 		updateCards(cardList.splice(0,3),"await");
+		document.querySelector("video").pause();
+// 		document.querySelector("video").
+		document.querySelector("loading-preloader").style.display="none";
 		observeDom = document.querySelector("#test-container >div:last-child");
             // https://my-img.cc/i/2022/04/25/6265ea81b426e.ico
           
