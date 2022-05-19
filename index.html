@@ -291,7 +291,7 @@ let res = await axios({
         // console.log(tags);
         let obj = {};
         if(source === ""){
-            source = "https://yande.re/posts/"+id
+            source = "https://yande.re/post/show/"+id
         } else { 
             if(source.includes("pximg")){
                 const pixivId = source.match(/\d+(?=_)/);
